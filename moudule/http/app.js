@@ -13,7 +13,8 @@ const server = http.createServer((request, response)=>{
 		response.end();
 
 	}else if( request.url == '/home'){
-		var content = fs.readFileSync('home.html');
+        var content = fs.readFileSync('home.html');
+        //response.writeHead(200, {'contentType' : 'text/plain'});
 		response.write(content.toString());
 		response.end();
 	
