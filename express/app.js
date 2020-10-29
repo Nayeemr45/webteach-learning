@@ -1,19 +1,27 @@
-const { response } = require('express');
-const express = require('express');
-const { request } = require('http');
+//declaration
+const express 		= require('express');
+const login 		= require('./controllers/login');
+const home 			= require('./controllers/home');
+const logout 		= require('./controllers/logout');
+const app 			= express();
 
-const app = express();
+//config
+app.set('view engine', 'ejs');
 
-app.get('/' , (request , response)=>{
-    console.log('requested url /');
-    response.send('index.page');
+
+//middleware
+app.use('/login', login);
+app.use('/home', home);
+app.use('/logout', logout);
+
+
+//route
+app.get('/', (request, response)=>{
+	response.send('This is index page');
 });
-app.get('/home' , (request , response)=>{
-    console.log('requested url /home');
-    response.send('home.page');
 
-});
 
-app.listen(3000 , (error)=>{
-    console.log("express server started at 3000...");
+//server startup
+app.listen(3000, (error)=> {
+	console.log('express server started at 3000 port');
 });
